@@ -29,8 +29,7 @@ def put_in_index(lookup_table, index_on, name, score):
 for line in f.readlines():
   num_total += 1
   name, score = line.split(',')
-  has_special_index = False
-  prev_underscore_idx = -1
+  prev_underscore_indices = []
   for i in range(len(name)):
     c = name[i]
     if c == '.':
@@ -39,15 +38,15 @@ for line in f.readlines():
       put_in_index(lookup_table, name[:i], name, int(score))
       num_entries += 1
 
-      # index _<query>. if there was a previous underscore
-      if prev_underscore_idx > -1:
+      # index _<query>. for all previous underscores
+      for prev_underscore_idx in prev_underscore_indices:
         index_on = name[prev_underscore_idx+1:i]
         if index_on != '':
           put_in_index(lookup_table, index_on, name, int(score))
         num_entries += 1
 
     if c == '_':
-      prev_underscore_idx = i
+      prev_underscore_indices.append(i)
 
   if num_total % 50000 == 0:
     print '%d (%d) ...' % (num_total, num_entries)
