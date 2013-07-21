@@ -30,5 +30,5 @@ if __name__ == "__main__":
   print
   while True:
     query = raw_input('Search for a variable: ')
-    print run_query(query)
-    print
+    for result in run_query(query):
+      print '%s: %s' % (result['name'], result['score'])

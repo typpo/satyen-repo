@@ -44,6 +44,6 @@ for line in f.readlines():
 print num_entries, 'entries total for', num_total, 'lines total'
 
 print 'Writing serialized file...'
-pickle.dump(lookup_table, open(sys.argv[2], 'w'))
+pickle.dump(lookup_table, open(sys.argv[2], 'w'), pickle.HIGHEST_PROTOCOL)
 
 print 'Done.'
