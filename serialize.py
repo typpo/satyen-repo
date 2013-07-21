@@ -1,10 +1,17 @@
+#!/usr/bin/env python
 # Reads CSV of name, score pairs and creates a data structure for quick lookup
 # of names matching "<query>." or "<query>_"
+#
 # usage:
 # serialize.py <csv_path> <output_path>
+#
 
 import sys
 import pickle
+
+if len(sys.argv) < 2:
+  print 'usage: serialize <csv_path> <serialized_output_path>'
+  sys.exit(1)
 
 f = open(sys.argv[1], 'r')
 
@@ -22,7 +29,12 @@ for line in f.readlines():
     if c in SPECIAL_CHARS:
       # Index the string up to this specific position, because it matches the
       # desired query format.
-      lookup_table[name[:i]] = { 'score': int(idx), 'name': name }
+
+      index_on = name[:i]
+      lookup_table.setdefault(index_on, [])
+      # Some queries can match multiple, so we keep a list in no particular
+      # order..
+      lookup_table[name[:i]].append({ 'score': int(idx), 'name': name })
       num_entries += 1
 
   if num_total % 50000 == 0:

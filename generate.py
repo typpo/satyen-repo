@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # Generates test data for Java Name Lookup problem
 # usage:
 # generate.py <path> <# sample lines>
@@ -5,6 +6,10 @@
 import sys
 import string
 from random import choice, randint
+
+if len(sys.argv) < 2:
+  print 'usage: generate <path> <# sample lines>'
+  sys.exit(1)
 
 # http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.8
 # Put in some more underscores and periods to test main use case...
