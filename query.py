@@ -27,8 +27,12 @@ def run_query(query):
 if __name__ == "__main__":
   print 'Ready.'
   print 'This program matches queries matching variables of the form "<query>." and "<query>_"'
+  print 'Type "q" to exit.'
   print
   while True:
     query = raw_input('Search for a variable: ')
+    if query == 'q':
+      break
     for result in run_query(query):
       print '%s: %s' % (result['name'], result['score'])
+    print
