@@ -10,7 +10,7 @@
 #
 
 import sys
-import pickle
+import cPickle as pickle
 
 if len(sys.argv) < 1:
   print 'usage: query <serialized_path>'

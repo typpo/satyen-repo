@@ -7,7 +7,7 @@
 #
 
 import sys
-import pickle
+import cPickle as pickle
 
 if len(sys.argv) < 2:
   print 'usage: serialize <csv_path> <serialized_output_path>'
