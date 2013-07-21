@@ -26,6 +26,9 @@ def run_query(query):
   print 'Searching for "%s"' % (query)
   return lookup_table.get(query, None)
 
+def result_comparator(a, b):
+  return b['score'] - a['score']
+
 if __name__ == "__main__":
   print 'Ready.'
   print 'This program matches queries matching variables of the form "<query>." and "<query>_"'
@@ -37,7 +40,7 @@ if __name__ == "__main__":
       break
     results = run_query(query)
     if results:
-      for result in results:
+      for result in sorted(results, cmp=result_comparator)[:10]:
         print '%s: %s' % (result['name'], result['score'])
     else:
       print 'No matches.'

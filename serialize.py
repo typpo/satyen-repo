@@ -24,7 +24,7 @@ def put_in_index(lookup_table, index_on, name, score):
   lookup_table.setdefault(index_on, [])
   # Some queries can match multiple, so we keep a list in no particular
   # order..
-  lookup_table[name[:i]].append({ 'score': score, 'name': name })
+  lookup_table[index_on].append({ 'score': score, 'name': name })
 
 for line in f.readlines():
   num_total += 1
@@ -41,7 +41,9 @@ for line in f.readlines():
 
       # index _<query>. if there was a previous underscore
       if prev_underscore_idx > -1:
-        put_in_index(lookup_table, name[prev_underscore_idx+1:i], name, int(score))
+        index_on = name[prev_underscore_idx+1:i]
+        if index_on != '':
+          put_in_index(lookup_table, index_on, name, int(score))
         num_entries += 1
 
     if c == '_':
