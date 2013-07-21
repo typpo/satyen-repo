@@ -16,11 +16,13 @@ if len(sys.argv) < 1:
   print 'usage: query <serialized_path>'
   sys.exit(1)
 
+# Reading in the lookup table takes some time, but actual lookups are O(1)
 print 'Loading lookup table...'
 lookup_table = pickle.load(open(sys.argv[1], 'r'))
 print 'Loaded.'
 
 def run_query(query):
+  # Returns matches for a given query in the form of a list of {name, score}
   print 'Searching for "%s"' % (query)
   return lookup_table.get(query, None)
 

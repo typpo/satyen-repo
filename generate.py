@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # Generates test data for Java Name Lookup problem
+#
 # usage:
 # generate.py <path> <# sample lines>
+#
 
 import sys
 import string

@@ -40,9 +40,11 @@ for line in f.readlines():
   if num_total % 50000 == 0:
     print '%d (%d) ...' % (num_total, num_entries)
 
-#print lookup_table
 print num_entries, 'entries total for', num_total, 'lines total'
 
+# This part can be a bit slow; takes about 46s on my computer.
+# But we only need to do this once, so I preferred to optimize lookup
+# rather than creation..
 print 'Writing serialized file...'
 pickle.dump(lookup_table, open(sys.argv[2], 'w'), pickle.HIGHEST_PROTOCOL)
 
