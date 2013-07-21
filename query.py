@@ -35,6 +35,10 @@ if __name__ == "__main__":
     query = raw_input('Search for a variable: ')
     if query == 'q':
       break
-    for result in run_query(query):
-      print '%s: %s' % (result['name'], result['score'])
+    results = run_query(query)
+    if results:
+      for result in results:
+        print '%s: %s' % (result['name'], result['score'])
+    else:
+      print 'No matches.'
     print
